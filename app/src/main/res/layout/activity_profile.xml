@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        />
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/mike"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Username"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/changePassword"
+        android:text="change password"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/oldpassword"
+        android:hint="Enter your old password"
+        android:textAlignment="center"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/newpassword"
+        android:hint="Enter your new password"
+        android:textAlignment="center"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Back to main page"
+        android:id="@+id/back"
+        />
+
+
+</LinearLayout>
