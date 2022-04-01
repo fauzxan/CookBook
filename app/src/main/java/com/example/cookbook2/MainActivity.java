@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+//looking for this change
 public class MainActivity extends AppCompatActivity {
 
     private Button logout;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview;
     private Button profile;
     private Button help;
+    private Button barcode;
 
 
     @Override
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         listview = findViewById(R.id.list);
         profile=findViewById(R.id.profile);
         help=findViewById(R.id.help);
+        barcode=findViewById(R.id.barcode);
 
         String username=FirebaseAuth.getInstance().getUid();
 
@@ -86,7 +88,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        barcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, com.example.cookbook2.barcode.class));
+            }
+        });
 
 
         //code for adding item
