@@ -5,12 +5,14 @@ import static java.lang.Integer.parseInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,9 +28,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 //looking for this change
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Button logout;
     private EditText item;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Button help;
     private Button barcode;
 
+    int year,month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         profile=findViewById(R.id.profile);
         help=findViewById(R.id.help);
         barcode=findViewById(R.id.barcode);
+
+
 
         String username=FirebaseAuth.getInstance().getUid();
 
@@ -100,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                showDatePickerDialog();
+
                 String txt_item = item.getText().toString();//gets value of item from the text field
                 //String txt_location = location.getText().toString();
                 //if (txt_item.isEmpty()||txt_location.isEmpty()){
@@ -115,9 +123,12 @@ public class MainActivity extends AppCompatActivity {
                                 String temp= (String) snapshot.child("qty").getValue();
                                 int qty=parseInt(temp);
                                 locate.child(txt_item).child("qty").setValue(String.valueOf(++qty));
+                                String old=snapshot.child("ED").getValue().toString().concat(""+day+"/"+month+"/"+year+",");
+                                locate.child(txt_item).child("ED").setValue(old);
                             }
                             else {
                                 locate.child(txt_item).child("qty").setValue("1");
+                                locate.child(txt_item).child("ED").setValue(""+day+"/"+month+"/"+year+",");
                             }
                         }
 
@@ -135,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 //}
             }
         });
+
+
 
 
 
@@ -218,8 +231,10 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot ss: snapshot.getChildren()){
                     String temp=ss.getKey();
                     for (DataSnapshot ss2: snapshot.child(temp).getChildren()){
-                        if (ss2.getKey().equals(temp)) list.add(ss2.getValue().toString());
-                        else{
+                        if (ss2.getKey().equals(temp)) {
+                            list.add(ss2.getValue().toString());//adds the items in the database to the list
+                        }
+                        else if (ss2.getKey().equals("qty")){
                             int foo=list.indexOf(temp);
                             String foo2=list.get(foo);
                             list.set(foo,foo2+"\n"+"Quantity:"+ss2.getValue().toString());
@@ -236,6 +251,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (DatePickerDialog.OnDateSetListener) this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+        this.year=year;
+        this.month=month;
+        this.day =dayOfMonth;
     }
 
     private ArrayAdapter<String> makeAdapter(ArrayList<String> list){//this method sets the adapter. Declared as a separate function because we this is used more than once
