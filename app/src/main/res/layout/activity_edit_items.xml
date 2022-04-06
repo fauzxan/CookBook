@@ -38,16 +38,14 @@
         android:text="Remove"
         />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/remove"
         android:layout_above="@+id/logout"
-        android:background="@color/white"
         android:divider="#FFF300"
         android:dividerHeight="10dp"
-
         />
 
     <Button
@@ -83,7 +81,7 @@
         android:text="barcode" />
 
     <Button
-        android:id="@+id/help"
+        android:id="@+id/cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list"
@@ -91,5 +89,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_toRightOf="@+id/barcode"
-        android:text="help" />
+        android:text="cart" />
 </RelativeLayout>

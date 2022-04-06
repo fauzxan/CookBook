@@ -1,25 +1,25 @@
+
 package com.example.cookbook2;
 
 import static java.lang.Integer.parseInt;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +28,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+
 //looking for this change
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -37,12 +39,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private EditText location;
     private Button add;
     private Button remove;
-    private ListView listview;
+    private RecyclerView listview;
     private Button profile;
-    private Button help;
+    private Button cart;
     private Button barcode;
+    private MyRecyclerViewAdapter adapter;
 
-    int year,month, day;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +59,24 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         remove=findViewById(R.id.remove);
         listview = findViewById(R.id.list);
         profile=findViewById(R.id.profile);
-        help=findViewById(R.id.help);
+        cart=findViewById(R.id.cart);
         barcode=findViewById(R.id.barcode);
 
+        ArrayList<String> list = new ArrayList<>();
 
+        //setup the recycler view
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        listview.setLayoutManager(layout);
+        adapter = new MyRecyclerViewAdapter(this, list);
+        listview.setAdapter(adapter);
+        DividerItemDecoration divider = new DividerItemDecoration(cart.getContext(),layout.getOrientation());
+        listview.addItemDecoration(divider);
 
         String username=FirebaseAuth.getInstance().getUid();
 
         DatabaseReference mainroot=FirebaseDatabase.getInstance("https://cookbook-59b04-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child(username);
         DatabaseReference root = mainroot.child("User Inventory");
-        DatabaseReference locate = root.child("Fridge");//this is fridge
-
-
+        DatabaseReference locate = root.child("Location");//this is location of food stored
 
         //code for logout button
         logout.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +95,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        help.setOnClickListener(new View.OnClickListener() {
+        cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, com.example.cookbook2.HelpActivity.class));
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
 
@@ -100,61 +109,38 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-
         //code for adding item
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                showDatePickerDialog();
-
-                String txt_item = item.getText().toString();//gets value of item from the text field
-                //String txt_location = location.getText().toString();
-                //if (txt_item.isEmpty()||txt_location.isEmpty()){
-                //    Toast.makeText(MainActivity.this, "Field empty!",Toast.LENGTH_SHORT).show();
-                //} else{
-                if (!txt_item.isEmpty() && !txt_item.equals("\n"))
-                {
-                    locate.child(txt_item).child(txt_item).setValue(txt_item);//pushes the value into the database.\
-                    locate.child(txt_item).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {// this is to return a snapshot of all the elements in the database at "locate"
-                            if (snapshot.hasChild("qty")){// this if else statement increases the qty of existing element if it already exists in the list.
-                                String temp= (String) snapshot.child("qty").getValue();
-                                int qty=parseInt(temp);
-                                locate.child(txt_item).child("qty").setValue(String.valueOf(++qty));
-                                String old=snapshot.child("ED").getValue().toString().concat(""+day+"/"+month+"/"+year+",");
-                                locate.child(txt_item).child("ED").setValue(old);
-                            }
-                            else {
-                                locate.child(txt_item).child("qty").setValue("1");
-                                locate.child(txt_item).child("ED").setValue(""+day+"/"+month+"/"+year+",");
-                            }
+                Toast.makeText(MainActivity.this, "Please enter expiry date", Toast.LENGTH_LONG).show();
+                //showDatePickerDialog();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        (DatePickerDialog.OnDateSetListener) MainActivity.this,
+                        Calendar.getInstance().get(Calendar.YEAR),
+                        Calendar.getInstance().get(Calendar.MONTH),
+                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+                datePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        String txt_item = item.getText().toString();//gets value of item from the text field
+                        if (!txt_item.isEmpty() && !txt_item.equals("\n"))
+                        {
+                            locate.child(txt_item).child(txt_item).setValue(txt_item);//pushes the value into the database.\
+                            UpdateItems adder = new UpdateItems();
+                            adder.add(txt_item,date);
                         }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                        else
+                        {
+                            Toast.makeText(MainActivity.this,"Field is empty",Toast.LENGTH_SHORT);
                         }
-                    });
-
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this,"Field is empty",Toast.LENGTH_SHORT);
-                }
-                //}
+                    }
+                });
             }
         });
-
-
-
-
-
-        ArrayList<String> list = new ArrayList<>();
-        listview.setAdapter(makeAdapter(list));//makeAdapter has been made into a method
-
-
 
         //remove item code
         remove.setOnClickListener(new View.OnClickListener() {// if the remove button is clicked, we start looking for the items that have been clicked
@@ -162,64 +148,49 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view)
             {
                 Toast.makeText(MainActivity.this,"Select items to remove them",Toast.LENGTH_SHORT).show();
-
-                listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                {//looks for the item that has been clicked
-
+                adapter.setClickListener(new MyRecyclerViewAdapter.ItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-                    {
+                    public void onItemClick(View view, int i) {
                         // i is the index of the list item that has been clicked. Which also happens to be the same as the index of the element in the list
                         String remove_item=list.get(i);
                         String[] remove_item_split=remove_item.split("\n");
                         String toBeRemoved=remove_item_split[0];
-                        System.out.println(toBeRemoved);
-                        locate.child(toBeRemoved).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String toCompare=""+snapshot.child("qty").getValue();
-                                if (toCompare.equals("1")) {
-                                    locate.child(toBeRemoved).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        //this method helps see if the item has been successfully removed from the database or an error occurred in the process.
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                String toast_msg = toBeRemoved + " has been removed successfully!";//this is the float message to be displayed once the item has been removed successfully
-                                                Toast.makeText(MainActivity.this, toast_msg, Toast.LENGTH_SHORT);
-                                                list.remove(toBeRemoved);
-                                                listview.setAdapter(makeAdapter(list));//to refresh the list
-                                            } else {//will pop this message if the item hasn't been removed
-                                                Toast.makeText(MainActivity.this, "Item was not removed. There was a problem on the backend side", Toast.LENGTH_SHORT);
-                                            }
-                                        }
-                                    });
-                                }
-                                else{
-                                    System.out.println(snapshot.child("qty").getValue());
-                                    String qty_str=""+snapshot.child("qty").getValue();
-                                    int qty=Integer.parseInt(qty_str);//to retrieve qty from database using singlevalueeventlistener
-                                    locate.child(toBeRemoved).child("qty").setValue(--qty);//decrementing the qty retrieved
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                System.out.println("here");
-                            }
-                        });
-
-
-
-
+                        UpdateItems remover = new UpdateItems();
+                        remover.remove(toBeRemoved);
                     }
                 });
             }
         });
 
+        //check for expiry dates on the current day
+        root.child("Expiry Date").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+                int month = 1+Calendar.getInstance().get(Calendar.MONTH);
+                int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                String mth = ""+month;
+                if (mth.length() == 1){
+                    mth = "0"+mth;
+                }
+                String today = year+"-"+mth+"-"+day;
 
-
-
-
+                if (snapshot.hasChild(today)){
+                    for (DataSnapshot ss: snapshot.child(today).getChildren()){
+                        int qty = parseInt(ss.getValue().toString());
+                        UpdateItems removeExpired = new UpdateItems();
+                        for (int i=0; i<qty; i++){
+                            removeExpired.remove(ss.getKey());
+                        }
+                        root.child("Cart").child(ss.getKey()).setValue(ss.getKey());//item is added to cart/shopping list when it is expired
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         //whenever you add or remove value from the database, this method listens to it
         locate.addValueEventListener(new ValueEventListener()
@@ -228,49 +199,42 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
 
+                for (DataSnapshot sss: snapshot.getChildren()){
+                    String temp=sss.getKey();
+                    list.add(temp);}
+
                 for (DataSnapshot ss: snapshot.getChildren()){
                     String temp=ss.getKey();
                     for (DataSnapshot ss2: snapshot.child(temp).getChildren()){
-                        if (ss2.getKey().equals(temp)) {
-                            list.add(ss2.getValue().toString());//adds the items in the database to the list
-                        }
-                        else if (ss2.getKey().equals("qty")){
+                        if (ss2.getKey().equals("qty")){
                             int foo=list.indexOf(temp);
                             String foo2=list.get(foo);
-                            list.set(foo,foo2+"\n"+"Quantity:"+ss2.getValue().toString());
+
+                            String zED = ""+ss.child("zED").getValue();
+                            ArrayList<String> dates = new ArrayList<String>(Arrays.asList(zED.split(",")));//list of expiry dates
+                            String newDates = dates.remove(0);
+
+                            list.set(foo,foo2+"\n"+"Quantity: "+ss2.getValue().toString()+"\n"+"Nearest expiry date: "+newDates);
                         }
                     }
                 }
-                makeAdapter(list).notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
     }
 
-    public void showDatePickerDialog(){
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (DatePickerDialog.OnDateSetListener) this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
-
+    //for the datepickerdialog
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-        this.year=year;
-        this.month=month;
-        this.day =dayOfMonth;
+        month = month+1;
+        String mth = ""+month;
+        if (mth.length() == 1){
+            mth = "0"+mth;
+        }
+        date = year+"-"+mth+"-"+dayOfMonth;
     }
 
-    private ArrayAdapter<String> makeAdapter(ArrayList<String> list){//this method sets the adapter. Declared as a separate function because we this is used more than once
-        return new ArrayAdapter<>(this,R.layout.list_item,list);//list_item is a .xml file (see res/layout)
-    }
 }
