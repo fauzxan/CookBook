@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,13 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);//sets the starting content layout
+
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null){
+            Intent i = new Intent(StartActivity.this,MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        }
 
         textViewMsg = findViewById(R.id.textViewMesg);
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference();
