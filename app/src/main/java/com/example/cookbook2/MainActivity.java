@@ -123,9 +123,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         Calendar.getInstance().get(Calendar.MONTH),
                         Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
-                datePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
+                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                        month = month+1;
+                        String mth = ""+month;
+                        if (mth.length() == 1){
+                            mth = "0"+mth;
+                        }
+                        date = year+"-"+mth+"-"+dayOfMonth;
                         String txt_item = item.getText().toString();//gets value of item from the text field
                         if (!txt_item.isEmpty() && !txt_item.equals("\n"))
                         {
