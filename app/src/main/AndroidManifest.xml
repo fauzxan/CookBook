@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cookbook2">
+        <receiver android:name=".NotificationReceiver"/>
         <activity
             android:name="com.example.CookBook.ShoppingList"
             android:exported="false"
