@@ -1,4 +1,4 @@
-package com.example.cookbook2;
+package com.example.CookBook;
 
 public class Cart {
     private String item_name;

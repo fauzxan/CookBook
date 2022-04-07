@@ -1,5 +1,5 @@
 
-package com.example.cookbook2;
+package com.example.CookBook;
 
 import static java.lang.Integer.parseInt;
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, com.example.cookbook2.ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, com.example.CookBook.ProfileActivity.class));
             }
         });
 

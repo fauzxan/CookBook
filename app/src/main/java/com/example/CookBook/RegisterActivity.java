@@ -1,4 +1,4 @@
-package com.example.cookbook2;
+package com.example.CookBook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

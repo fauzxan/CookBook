@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cookbook2">
+    package="com.example.CookBook">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -16,34 +16,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cookbook2">
         <activity
-            android:name=".ShoppingList"
+            android:name="com.example.CookBook.ShoppingList"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.example.CookBook.MainActivity"/>
         <activity
-            android:name=".AddCart"
+            android:name="com.example.CookBook.AddCart"
             android:exported="false"
-            android:parentActivityName=".ShoppingList"/>
+            android:parentActivityName="com.example.CookBook.ShoppingList"/>
         <activity
-            android:name=".BarcodeActivity"
+            android:name="com.example.CookBook.BarcodeActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.example.CookBook.MainActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.CookBook.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.CookBook.LoginActivity"
             android:exported="false"
-            android:parentActivityName=".StartActivity"/>
+            android:parentActivityName="com.example.CookBook.StartActivity"/>
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.example.CookBook.RegisterActivity"
             android:exported="false"
-            android:parentActivityName=".StartActivity"/>
+            android:parentActivityName="com.example.CookBook.StartActivity"/>
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.example.CookBook.ProfileActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.example.CookBook.MainActivity"/>
         <activity
-            android:name=".StartActivity"
+            android:name="com.example.CookBook.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
