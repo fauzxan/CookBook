@@ -47,6 +47,7 @@
         android:id="@+id/oldpassword"
         android:hint="Enter your old password"
         android:textAlignment="center"
+        android:inputType="textPassword"
         />
     <EditText
         android:layout_width="match_parent"
@@ -55,6 +56,7 @@
         android:id="@+id/newpassword"
         android:hint="Enter your new password"
         android:textAlignment="center"
+        android:inputType="textPassword"
         />
     <Button
         android:layout_width="match_parent"
