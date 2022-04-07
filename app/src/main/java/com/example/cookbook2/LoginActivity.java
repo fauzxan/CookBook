@@ -42,37 +42,25 @@ public class LoginActivity extends AppCompatActivity {
                 String txt_password = password.getText().toString();
                 loginUser(txt_email,txt_password);
             }
-
             //code to retrieve the instance associated with this user
-
         });
     }
 
     private void loginUser(String email, String password) {
-
-/*        auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(LoginActivity.this, "Logged In!",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                finish();
-            }
-        });*/
 
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(LoginActivity.this, "Logged In!",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    finish();
-
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
 }

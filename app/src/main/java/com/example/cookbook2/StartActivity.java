@@ -69,14 +69,12 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(StartActivity.this,RegisterActivity.class));
-                finish();
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StartActivity.this,LoginActivity.class));
-                finish();
             }
         });
 

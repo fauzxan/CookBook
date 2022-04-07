@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/changePassword"
         android:text="change password"
-        android:textSize="20dp"
+        android:textSize="15sp"
         />
     <EditText
         android:layout_width="match_parent"
@@ -57,13 +57,6 @@
         android:hint="Enter your new password"
         android:textAlignment="center"
         android:inputType="textPassword"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Back to main page"
-        android:id="@+id/back"
         />
 
 

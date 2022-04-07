@@ -21,9 +21,10 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddCart"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ShoppingList"/>
         <activity
-            android:name=".barcode"
+            android:name=".BarcodeActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
         <activity
@@ -31,10 +32,12 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".StartActivity"/>
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".StartActivity"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false"

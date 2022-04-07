@@ -49,9 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
                     registerUser(txt_email,txt_password);
                 }
             }
-
-            //some code to create a new instance in the database
-
         }
         );
 

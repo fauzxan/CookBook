@@ -36,13 +36,12 @@ public class CartRecyclerView_Config {
             super(LayoutInflater.from(mContext).inflate(R.layout.cart_items, parent, false));
             mTitle = (TextView) itemView.findViewById(R.id.cart_txtview);
             mQuantity = (TextView) itemView.findViewById(R.id.cart_quantity);
-
-
         }
 
         public void bind(Cart carts, String key){
             mTitle.setText(carts.getItem_name());
-            mQuantity.setText(carts.getQuantity());
+            String temp = "Quantity: "+carts.getQuantity();
+            mQuantity.setText(temp);
             this.key = key;
         }
     }

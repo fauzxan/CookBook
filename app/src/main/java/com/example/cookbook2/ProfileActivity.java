@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button changePassword;
     private EditText oldpassword;
     private  EditText newpassword;
-    private Button back;
+    //private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         changePassword=findViewById(R.id.changePassword);
         oldpassword=findViewById(R.id.oldpassword);
         newpassword=findViewById(R.id.newpassword);
-        back=findViewById(R.id.back);
+        //back=findViewById(R.id.back);
 
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
@@ -51,7 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
         username.setText(usernameToAssign);
 
             //AuthCredential credential = ;
-
 
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,14 +83,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, com.example.cookbook2.MainActivity.class));
-            }
-        });
-
-
     }
-
 }

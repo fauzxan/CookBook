@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -85,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this,"Logged Out!",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, com.example.cookbook2.StartActivity.class));// this takes you back to the StartActivity class
+                Intent i = new Intent(MainActivity.this, StartActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);// this takes you back to the StartActivity class
             }
         });
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, com.example.cookbook2.barcode.class));
+                startActivity(new Intent(MainActivity.this, BarcodeActivity.class));
             }
         });
 
