@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 //looking for this change
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CartActivity.class));
+                startActivity(new Intent(MainActivity.this, ShoppingList.class));
             }
         });
 
@@ -189,7 +190,25 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         for (int i=0; i<qty; i++){
                             removeExpired.remove(ss.getKey());
                         }
-                        root.child("Cart").child(ss.getKey()).setValue(ss.getKey());//item is added to cart/shopping list when it is expired
+                        //root.child("Cart").child(ss.getKey()).setValue(ss.getKey());//item is added to cart/shopping list when it is expired
+                        Cart expired = new Cart();
+                        expired.setItem_name(ss.getKey());
+                        expired.setQuantity(ss.getValue().toString());
+                        new FirebaseHelper().updateCart(expired, new FirebaseHelper.DataStatus() {
+                            @Override
+                            public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {
+                            }
+                            @Override
+                            public void DataInserted() {
+                            }
+                            @Override
+                            public void DataIsUpdated() {
+                            }
+                            @Override
+                            public void DataIsDeleted() {
+                            }
+                        });
+
                     }
                 }
             }
