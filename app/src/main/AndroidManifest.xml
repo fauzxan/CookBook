@@ -17,18 +17,15 @@
         android:theme="@style/Theme.Cookbook2">
         <activity
             android:name=".ShoppingList"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddCart"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
-            android:exported="false"
-            android:label="@string/title_activity_help"
-            android:theme="@style/Theme.Cookbook2.NoActionBar" />
-        <activity
             android:name=".barcode"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -40,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".StartActivity"
             android:exported="true">

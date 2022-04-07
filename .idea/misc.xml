@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookGitnew/app/src/main/res/layout/activity_cart.xml" value="0.358695652173913" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_barcode.xml" value="0.2234375" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_cart.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_edit_items.xml" value="0.2234375" />
@@ -12,9 +13,6 @@
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_profile.xml" value="0.2234375" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_start.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/list_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookgit/app/src/main/res/layout/activity_add_cart.xml" value="0.18034447821681865" />
-        <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookgit/app/src/main/res/layout/activity_shopping_list.xml" value="0.18034447821681865" />
-        <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookgit/app/src/main/res/layout/cart_items.xml" value="0.18034447821681865" />
       </map>
     </option>
   </component>
