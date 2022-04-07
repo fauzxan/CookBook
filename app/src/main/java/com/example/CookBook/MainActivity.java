@@ -8,12 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,6 +38,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 //looking for this change
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -136,7 +142,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         if (mth.length() == 1){
                             mth = "0"+mth;
                         }
-                        date = year+"-"+mth+"-"+dayOfMonth;
+                        String dayt = ""+dayOfMonth;
+                        if (dayt.length() == 1){
+                            dayt = "0"+dayt;
+                        }
+                        date = year+"-"+mth+"-"+dayt;
                         String txt_item = item.getText().toString();//gets value of item from the text field
                         if (!txt_item.isEmpty() && !txt_item.equals("\n"))
                         {
@@ -185,7 +195,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 if (mth.length() == 1){
                     mth = "0"+mth;
                 }
-                String today = year+"-"+mth+"-"+day;
+                String dayt = ""+day;
+                if (dayt.length() == 1){
+                    dayt = "0"+dayt;
+                }
+                String today = year+"-"+mth+"-"+dayt;
 
                 if (snapshot.hasChild(today)){
                     for (DataSnapshot ss: snapshot.child(today).getChildren()){
@@ -266,27 +280,32 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         if (mth.length() == 1){
             mth = "0"+mth;
         }
-        date = year+"-"+mth+"-"+dayOfMonth;
+        String dayt = ""+dayOfMonth;
+        if (dayt.length() == 1){
+            dayt = "0"+dayt;
+        }
+        date = year+"-"+mth+"-"+dayt;
     }
 
     public void myAlarm() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 45);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 1);
         calendar.set(Calendar.SECOND, 0);
 
         if (calendar.getTime().compareTo(new Date()) < 0)
             calendar.add(Calendar.DAY_OF_MONTH, 1);
 
+        System.out.println(calendar);
+
         Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         if (alarmManager != null) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
     }
-
 
 }

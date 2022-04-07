@@ -83,7 +83,11 @@ public class BarcodeActivity extends AppCompatActivity implements DatePickerDial
                                 if (mth.length() == 1){
                                     mth = "0"+mth;
                                 }
-                                date = year+"-"+mth+"-"+dayOfMonth;
+                                String dayt = ""+dayOfMonth;
+                                if (dayt.length() == 1){
+                                    dayt = "0"+dayt;
+                                }
+                                date = year+"-"+mth+"-"+dayt;
 
                                 mainmain.addListenerForSingleValueEvent(new ValueEventListener()
                                 {
@@ -225,6 +229,10 @@ public class BarcodeActivity extends AppCompatActivity implements DatePickerDial
         if (mth.length() == 1){
             mth = "0"+mth;
         }
-        date = year+"-"+mth+"-"+dayOfMonth;
+        String dayt = ""+dayOfMonth;
+        if (dayt.length() == 1){
+            dayt = "0"+dayt;
+        }
+        date = year+"-"+mth+"-"+dayt;
     }
 }
