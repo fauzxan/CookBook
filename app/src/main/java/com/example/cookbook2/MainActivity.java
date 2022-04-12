@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity{
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 17);
-        calendar.set(Calendar.MINUTE, 23);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 26);
+        calendar.set(Calendar.SECOND, 30);
 
         if (calendar.getTime().compareTo(new Date()) < 0)
             calendar.add(Calendar.DAY_OF_MONTH, 1);

@@ -24,11 +24,13 @@
 
         <EditText
             android:id="@+id/input"
+            android:singleLine="true"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:inputType="textCapSentences"
             android:ems="10"
+            android:imeOptions="actionNext"
             android:hint="Enter Item"/>
 
             <ImageView
@@ -50,6 +52,7 @@
 
             <EditText
                 android:id="@+id/inputquantity"
+                android:singleLine="true"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
