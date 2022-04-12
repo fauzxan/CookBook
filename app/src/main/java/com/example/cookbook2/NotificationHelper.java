@@ -33,8 +33,8 @@ class NotificationHelper {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        mBuilder.setContentTitle("Food gone bad!")
-                .setContentText("Some of your items have expired!")
+        mBuilder.setContentTitle("Food going bad!")
+                .setContentText("Some of your items have expiring tomorrow!")
                 .setAutoCancel(false)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(resultPendingIntent);

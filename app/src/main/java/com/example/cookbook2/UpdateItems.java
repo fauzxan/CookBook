@@ -66,7 +66,7 @@ public class UpdateItems {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if (snapshot.hasChild("qty")){// this if else statement increases the qty of existing element if it already exists in the list.
-                    String temp= (String) snapshot.child("qty").getValue();
+                    String temp= ""+snapshot.child("qty").getValue();
                     int qty=parseInt(temp);
                     locate.child(toBeAdded).child("qty").setValue(String.valueOf(++qty));
 

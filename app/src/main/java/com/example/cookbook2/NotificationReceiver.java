@@ -27,7 +27,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int month = 1+Calendar.getInstance().get(Calendar.MONTH);
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int day = 1+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         String mth = ""+month;
         if (mth.length() == 1){
             mth = "0"+mth;

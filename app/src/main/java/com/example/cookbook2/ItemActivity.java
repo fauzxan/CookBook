@@ -190,19 +190,23 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
         });
 
         //whenever you add or remove value from the database, this method listens to it
-        locate.addValueEventListener(new ValueEventListener()
-        {
+        root.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
 
-                for (DataSnapshot sss: snapshot.getChildren()){
-                    String temp=sss.getKey();
-                    list.add(temp);}
+                for (DataSnapshot ss: snapshot.child("Expiry Date").getChildren()){
+                    for (DataSnapshot sss: ss.getChildren()){
+                        String itemname = sss.getKey();
+                        if (!list.contains(itemname)){
+                            list.add(itemname);
+                        }
+                    }
+                }
 
-                for (DataSnapshot ss: snapshot.getChildren()){
+                for (DataSnapshot ss: snapshot.child("Location").getChildren()){
                     String temp=ss.getKey();
-                    for (DataSnapshot ss2: snapshot.child(temp).getChildren()){
+                    for (DataSnapshot ss2: snapshot.child("Location").child(temp).getChildren()){
                         if (ss2.getKey().equals("qty")){
                             int foo=list.indexOf(temp);
                             String foo2=list.get(foo);
