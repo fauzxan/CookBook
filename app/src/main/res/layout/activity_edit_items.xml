@@ -18,6 +18,7 @@
 
         <EditText
             android:id="@+id/item"
+            android:fontFamily="@font/bukhari_script"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -53,6 +54,7 @@
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bukhari_script"
         android:id="@+id/remove"
         android:layout_below="@+id/layout1"
         android:text="REMOVE ITEMS"

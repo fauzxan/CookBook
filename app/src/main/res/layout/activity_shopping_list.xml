@@ -24,6 +24,7 @@
 
         <EditText
             android:id="@+id/input"
+            android:fontFamily="@font/bukhari_script"
             android:singleLine="true"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
 
             <EditText
                 android:id="@+id/inputquantity"
+                android:fontFamily="@font/bukhari_script"
                 android:singleLine="true"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"

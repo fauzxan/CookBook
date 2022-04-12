@@ -49,6 +49,7 @@
                 android:layout_gravity="center"
                 android:layout_below="@id/image_profile"
                 android:text="Username"
+                android:fontFamily="@font/bukhari_script"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:paddingTop="15dp"/>
@@ -62,6 +63,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bukhari_script"
                 android:id="@+id/changePassword1"
                 android:text="change password"
                 android:layout_marginTop="20dp"
