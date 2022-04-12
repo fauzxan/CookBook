@@ -79,11 +79,13 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
 
                 Toast.makeText(getContext(), "Please enter expiry date", Toast.LENGTH_LONG).show();
                 //showDatePickerDialog();
-                String monthtoday = ""+1+Calendar.getInstance().get(Calendar.MONTH);
+                int yr = Calendar.getInstance().get(Calendar.YEAR);
+                int mthtoday = 1+Calendar.getInstance().get(Calendar.MONTH);
+                String monthtoday = ""+mthtoday;
                 if (monthtoday.length() == 1){ monthtoday = "0"+monthtoday; }
                 String daytoday = ""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
                 if (daytoday.length() == 1){ daytoday = "0"+daytoday; }
-                String today = Calendar.getInstance().get(Calendar.YEAR)+"-"+monthtoday+"-"+daytoday;
+                String today = yr+"-"+monthtoday+"-"+daytoday;
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         view.getContext(),
                         (DatePickerDialog.OnDateSetListener) ItemActivity.this,
@@ -105,7 +107,7 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                         }
                         date = year+"-"+mth+"-"+dayt;
                         String txt_item = item.getText().toString();//gets value of item from the text field
-                        if (!txt_item.isEmpty() && !txt_item.equals("\n") && !(date.compareTo(today)<1))
+                        if (!txt_item.isEmpty() && !txt_item.equals("\n") && (date.compareTo(today)>0))
                         {
                             locate.child(txt_item).child(txt_item).setValue(txt_item);//pushes the value into the database.\
                             UpdateItems adder = new UpdateItems();
@@ -226,12 +228,12 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
         });
 
         //whenever you add or remove value from the database, this method listens to it
-        locate.addValueEventListener(new ValueEventListener()
+        root.child("Expiry Date").addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                root.addValueEventListener(new ValueEventListener() {
+                root.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         list.clear();
@@ -243,8 +245,10 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                                 }
                             }
                         }
+                        System.out.println(list);
                         for (DataSnapshot ss: snapshot.child("Location").getChildren()){
                             String temp=ss.getKey();
+                            System.out.println(temp);
                             for (DataSnapshot ss2: snapshot.child("Location").child(temp).getChildren()){
                                 String childname = ""+ss2.getKey();
                                 if (childname.equals("qty")){
