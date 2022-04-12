@@ -34,7 +34,7 @@ public class UpdateItems {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String toCompare=""+snapshot.child("qty").getValue();
 
-                String date_str = snapshot.child("zED").getValue().toString();
+                String date_str = ""+snapshot.child("zED").getValue();
                 ArrayList<String> dates = new ArrayList<String>(Arrays.asList(date_str.split(",")));
                 String removedate = dates.remove(0);
 
@@ -65,6 +65,9 @@ public class UpdateItems {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                com.example.cookbook2.UpdateExpiry adder = new com.example.cookbook2.UpdateExpiry();
+                adder.addItem(toBeAdded,date);
+
                 if (snapshot.hasChild("qty")){// this if else statement increases the qty of existing element if it already exists in the list.
                     String temp= ""+snapshot.child("qty").getValue();
                     int qty=parseInt(temp);
@@ -80,8 +83,7 @@ public class UpdateItems {
                     locate.child(toBeAdded).child("qty").setValue("1");
                     locate.child(toBeAdded).child("zED").setValue(""+date+",");
                 }
-                com.example.cookbook2.UpdateExpiry adder = new com.example.cookbook2.UpdateExpiry();
-                adder.addItem(toBeAdded,date);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

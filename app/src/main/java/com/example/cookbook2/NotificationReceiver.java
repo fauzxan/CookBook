@@ -32,7 +32,11 @@ public class NotificationReceiver extends BroadcastReceiver {
         if (mth.length() == 1){
             mth = "0"+mth;
         }
-        String today = year+"-"+mth+"-"+day;
+        String dayt = ""+day;
+        if (dayt.length() == 1){
+            dayt = "0"+dayt;
+        }
+        String today = year+"-"+mth+"-"+dayt;
 
         root.child("Expiry Date").addValueEventListener(new ValueEventListener() {
             @Override

@@ -79,6 +79,11 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
 
                 Toast.makeText(getContext(), "Please enter expiry date", Toast.LENGTH_LONG).show();
                 //showDatePickerDialog();
+                String monthtoday = ""+1+Calendar.getInstance().get(Calendar.MONTH);
+                if (monthtoday.length() == 1){ monthtoday = "0"+monthtoday; }
+                String daytoday = ""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                if (daytoday.length() == 1){ daytoday = "0"+daytoday; }
+                String today = Calendar.getInstance().get(Calendar.YEAR)+"-"+monthtoday+"-"+daytoday;
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         view.getContext(),
                         (DatePickerDialog.OnDateSetListener) ItemActivity.this,
@@ -100,7 +105,7 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                         }
                         date = year+"-"+mth+"-"+dayt;
                         String txt_item = item.getText().toString();//gets value of item from the text field
-                        if (!txt_item.isEmpty() && !txt_item.equals("\n"))
+                        if (!txt_item.isEmpty() && !txt_item.equals("\n") && !(date.compareTo(today)<1))
                         {
                             locate.child(txt_item).child(txt_item).setValue(txt_item);//pushes the value into the database.\
                             UpdateItems adder = new UpdateItems();
@@ -108,7 +113,7 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                         }
                         else
                         {
-                            Toast.makeText(getActivity().getApplicationContext(),"Field is empty",Toast.LENGTH_SHORT);
+                            Toast.makeText(getContext(),"Item cannot be added",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -155,7 +160,38 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                 }
                 String today = year+"-"+mth+"-"+dayt;
 
-                if (snapshot.hasChild(today)){
+                for (DataSnapshot sss: snapshot.getChildren()){
+                    String datetemp = ""+sss.getKey();
+                    if (datetemp.compareTo(today)<1){
+                        for (DataSnapshot ss: snapshot.child(datetemp).getChildren()){
+                            int qty = parseInt(ss.getValue().toString());
+                            UpdateItems removeExpired = new UpdateItems();
+                            for (int i=0; i<qty; i++){
+                                removeExpired.remove(ss.getKey());
+                            }
+                            //root.child("Cart").child(ss.getKey()).setValue(ss.getKey());//item is added to cart/shopping list when it is expired
+                            Cart expired = new Cart();
+                            expired.setItem_name(ss.getKey());
+                            expired.setQuantity(ss.getValue().toString());
+                            new FirebaseHelper().updateCart(expired, new FirebaseHelper.DataStatus() {
+                                @Override
+                                public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {
+                                }
+                                @Override
+                                public void DataInserted() {
+                                }
+                                @Override
+                                public void DataIsUpdated() {
+                                }
+                                @Override
+                                public void DataIsDeleted() {
+                                }
+                            });
+                        }
+                    }
+                }
+
+                /*if (snapshot.hasChild(today)){
                     for (DataSnapshot ss: snapshot.child(today).getChildren()){
                         int qty = parseInt(ss.getValue().toString());
                         UpdateItems removeExpired = new UpdateItems();
@@ -182,7 +218,7 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                         });
 
                     }
-                }
+                }*/
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -190,41 +226,51 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
         });
 
         //whenever you add or remove value from the database, this method listens to it
-        root.addValueEventListener(new ValueEventListener(){
+        locate.addValueEventListener(new ValueEventListener()
+        {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-
-                for (DataSnapshot ss: snapshot.child("Expiry Date").getChildren()){
-                    for (DataSnapshot sss: ss.getChildren()){
-                        String itemname = sss.getKey();
-                        if (!list.contains(itemname)){
-                            list.add(itemname);
+                root.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        list.clear();
+                        for (DataSnapshot ss: snapshot.child("Expiry Date").getChildren()){
+                            for (DataSnapshot sss: ss.getChildren()){
+                                String itemname = sss.getKey();
+                                if (!list.contains(itemname)){
+                                    list.add(itemname);
+                                }
+                            }
                         }
-                    }
-                }
+                        for (DataSnapshot ss: snapshot.child("Location").getChildren()){
+                            String temp=ss.getKey();
+                            for (DataSnapshot ss2: snapshot.child("Location").child(temp).getChildren()){
+                                String childname = ""+ss2.getKey();
+                                if (childname.equals("qty")){
+                                    int foo=list.indexOf(temp);
+                                    String foo2=list.get(foo);
 
-                for (DataSnapshot ss: snapshot.child("Location").getChildren()){
-                    String temp=ss.getKey();
-                    for (DataSnapshot ss2: snapshot.child("Location").child(temp).getChildren()){
-                        if (ss2.getKey().equals("qty")){
-                            int foo=list.indexOf(temp);
-                            String foo2=list.get(foo);
+                                    String zED = ""+ss.child("zED").getValue();
+                                    ArrayList<String> dates = new ArrayList<String>(Arrays.asList(zED.split(",")));//list of expiry dates
+                                    String newDates = dates.remove(0);
 
-                            String zED = ""+ss.child("zED").getValue();
-                            ArrayList<String> dates = new ArrayList<String>(Arrays.asList(zED.split(",")));//list of expiry dates
-                            String newDates = dates.remove(0);
-
-                            list.set(foo,foo2+"\n"+"Quantity: "+ss2.getValue().toString()+"\n"+"Nearest expiry date: "+newDates);
+                                    list.set(foo,foo2+"\n"+"Quantity: "+ss2.getValue().toString()+"\n"+"Nearest expiry date: "+newDates);
+                                }
+                            }
                         }
+                        adapter.notifyDataSetChanged();
                     }
-                }
-                adapter.notifyDataSetChanged();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
 
 //        myAlarm();
 
@@ -234,12 +280,6 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
     //for the datepickerdialog
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-        month = month+1;
-        String mth = ""+month;
-        if (mth.length() == 1){
-            mth = "0"+mth;
-        }
-        date = year+"-"+mth+"-"+dayOfMonth;
     }
 
 

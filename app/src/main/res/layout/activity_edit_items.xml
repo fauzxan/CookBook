@@ -21,7 +21,8 @@
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:hint="Enter item here" />
+            android:hint="Enter item here"
+            android:inputType="textCapSentences"/>
 
         <ImageButton
             android:id="@+id/add"
