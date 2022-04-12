@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity{
     public void myAlarm() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 13);
-        calendar.set(Calendar.MINUTE, 40);
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 23);
         calendar.set(Calendar.SECOND, 0);
 
         if (calendar.getTime().compareTo(new Date()) < 0)

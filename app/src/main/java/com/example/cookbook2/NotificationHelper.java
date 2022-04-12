@@ -34,7 +34,7 @@ class NotificationHelper {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
         mBuilder.setContentTitle("Food going bad!")
-                .setContentText("Some of your items have expiring tomorrow!")
+                .setContentText("Some of your items are expiring tomorrow!")
                 .setAutoCancel(false)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(resultPendingIntent);
