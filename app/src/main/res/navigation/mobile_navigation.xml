@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.CookBook.OpenBarcodeActivity"
+        android:name="com.example.cookbook2.OpenBarcodeActivity"
         android:label="Barcode"
         tools:layout="@layout/activity_openbarcode" />
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.CookBook.ItemActivity"
+        android:name="com.example.cookbook2.ItemActivity"
         android:label="ItemList"
         tools:layout="@layout/activity_edit_items" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.CookBook.ShoppingList"
+        android:name="com.example.cookbook2.ShoppingList"
         android:label="Cart"
         tools:layout="@layout/activity_shopping_list" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.CookBook.ProfileActivity"
+        android:name="com.example.cookbook2.ProfileActivity"
         android:label="Profile"
         tools:layout="@layout/activity_profile"/>
 

@@ -78,7 +78,7 @@ public class ProfileActivity extends Fragment {
         if(id == R.id.item1){
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(view.getContext(),"Logged Out!",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(view.getContext(), com.example.CookBook.StartActivity.class));
+            startActivity(new Intent(view.getContext(), StartActivity.class));
             return true;
         }
 
