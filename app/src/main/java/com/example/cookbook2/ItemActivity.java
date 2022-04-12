@@ -141,6 +141,9 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                         }
                     });
                 }
+                else{
+                    adapter.setClickListener(null);
+                }
             }
         });
 
