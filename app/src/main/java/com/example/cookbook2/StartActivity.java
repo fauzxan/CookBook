@@ -1,16 +1,13 @@
 package com.example.cookbook2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.sql.Timestamp;
-
-import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Timestamp;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -69,14 +68,12 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(StartActivity.this,RegisterActivity.class));
-                finish();
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StartActivity.this,LoginActivity.class));
-                finish();
             }
         });
 

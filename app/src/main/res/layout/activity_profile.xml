@@ -5,66 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
     tools:context=".ProfileActivity">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#acc"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <ImageView
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@drawable/mike"
-        android:layout_gravity="center"
-        />
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Username"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_profile"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                app:cardCornerRadius="250dp"
+                android:layout_gravity="center"
+                app:cardBackgroundColor="@color/white">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/changePassword"
-        android:text="change password"
-        android:textSize="20dp"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/oldpassword"
-        android:hint="Enter your old password"
-        android:textAlignment="center"
-        android:inputType="textPassword"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/newpassword"
-        android:hint="Enter your new password"
-        android:textAlignment="center"
-        android:inputType="textPassword"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Back to main page"
-        android:id="@+id/back"
-        />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:cardCornerRadius="250dp"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/mike"
+                        android:scaleType="centerCrop"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/image_profile"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingTop="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/changePassword1"
+                android:text="change password"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorButton"/>
+
+
+        </LinearLayout>
 
 
 </LinearLayout>

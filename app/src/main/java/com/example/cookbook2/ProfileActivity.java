@@ -1,46 +1,42 @@
 package com.example.cookbook2;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileActivity extends AppCompatActivity {
-
-
+public class ProfileActivity extends Fragment {
 
     private TextView username;
-    private Button changePassword;
-    private EditText oldpassword;
-    private  EditText newpassword;
-    private Button back;
+    private ImageView logout;
+    private Button updatePass;
+    private Button update;
+    View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        username=findViewById(R.id.username);
-        changePassword=findViewById(R.id.changePassword);
-        oldpassword=findViewById(R.id.oldpassword);
-        newpassword=findViewById(R.id.newpassword);
-        back=findViewById(R.id.back);
+        view = inflater.inflate(R.layout.activity_profile, container, false);
+        username= (TextView) view.findViewById(R.id.username);
+//        logout= (ImageView) view.findViewById(R.id.logout);
+        updatePass = (Button) view.findViewById(R.id.changePassword1);
+
+        setHasOptionsMenu(true);
 
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
@@ -52,46 +48,40 @@ public class ProfileActivity extends AppCompatActivity {
 
             //AuthCredential credential = ;
 
-
-        changePassword.setOnClickListener(new View.OnClickListener() {
+        updatePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //code to change the password
-
-                System.out.println(oldpassword.toString());
-
-                user.reauthenticate(EmailAuthProvider
-                        .getCredential(usernameToAssign, oldpassword.getText().toString()))
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    user.updatePassword(newpassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(ProfileActivity.this, "Password Updated!",Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(ProfileActivity.this, "Password not updated!",Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    Toast.makeText(ProfileActivity.this, "Authentication failed!! Enter the correct old password",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                startActivity(new Intent(view.getContext(), PasswordChangeActivity.class));
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, com.example.cookbook2.MainActivity.class));
-            }
-        });
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FirebaseAuth.getInstance().signOut();
+//                Toast.makeText(view.getContext(),"Logged Out!",Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(view.getContext(), StartActivity.class));// this takes you back to the StartActivity class
+//            }
+//        });
 
-
+        return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.item1){
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(view.getContext(),"Logged Out!",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(view.getContext(), com.example.CookBook.StartActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

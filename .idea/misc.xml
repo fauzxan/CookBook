@@ -12,6 +12,9 @@
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_profile.xml" value="0.2234375" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/activity_start.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/vinch/AndroidStudioProjects/CookBookTest/app/src/main/res/layout/list_item.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/ic_add_shopping_list.xml" value="0.1315" />
+        <entry key="app/src/main/res/layout/activity_add_cart.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>

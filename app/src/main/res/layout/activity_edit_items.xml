@@ -5,15 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     tools:context=".MainActivity">
 
-
-    <EditText
-        android:id="@+id/item"
+    <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:hint="Enter item here" />
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/item"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:hint="Enter item here" />
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorButton"
+            android:src="@drawable/ic_baseline_playlist_add_24" />
+
+    </LinearLayout>
 <!--
     <EditText
         android:id="@+id/location"
@@ -22,72 +40,73 @@
         android:layout_below="@+id/item"
         android:hint="Enter item location here" />
 -->
-    <Button
-        android:id="@+id/add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/item"
-        android:text="Add item"
-        />
+<!--    <Button-->
+<!--        android:id="@+id/add"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/layout1"-->
+<!--        android:text="Add item"-->
+<!--        />-->
 
-    <Button
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/add"
         android:id="@+id/remove"
-        android:text="Remove"
-        />
+        android:layout_below="@+id/layout1"
+        android:text="REMOVE ITEMS"
+        android:gravity="center"
+        android:background="@android:drawable/btn_default"
+        android:backgroundTint="@color/colorButton"
+        android:textColor="@color/text"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         android:layout_below="@+id/remove"
-        android:layout_above="@+id/logout"
         android:divider="#FFF300"
-        android:dividerHeight="10dp"
-        />
+        android:dividerHeight="10dp" />
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Logout" />
+<!--    <Button-->
+<!--        android:id="@+id/logout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:text="Logout" />-->
 
-    <Button
-        android:id="@+id/profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@+id/logout"
-        android:text="Profile" />
+<!--    <Button-->
+<!--        android:id="@+id/profile"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/list"-->
+<!--        android:layout_marginLeft="4dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_toRightOf="@+id/logout"-->
+<!--        android:text="Profile" />-->
 
-    <Button
-        android:id="@+id/barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@+id/profile"
-        android:text="barcode" />
+<!--    <Button-->
+<!--        android:id="@+id/barcode"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/list"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_toRightOf="@+id/profile"-->
+<!--        android:text="barcode" />-->
 
-    <Button
-        android:id="@+id/cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@+id/barcode"
-        android:text="cart" />
+<!--    <Button-->
+<!--        android:id="@+id/cart"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/list"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_toRightOf="@+id/barcode"-->
+<!--        android:text="cart" />-->
 </RelativeLayout>

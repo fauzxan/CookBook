@@ -1,28 +1,22 @@
 package com.example.cookbook2;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.valueOf;
 
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UpdateItems {
 
@@ -56,7 +50,7 @@ public class UpdateItems {
                     String newnew = newdates+",";
                     locate.child(toBeRemoved).child("zED").setValue(newnew);
                 }
-                UpdateExpiry remover = new UpdateExpiry();
+                com.example.cookbook2.UpdateExpiry remover = new com.example.cookbook2.UpdateExpiry();
                 remover.deleteItem(toBeRemoved,removedate);
             }
             @Override
@@ -86,7 +80,7 @@ public class UpdateItems {
                     locate.child(toBeAdded).child("qty").setValue("1");
                     locate.child(toBeAdded).child("zED").setValue(""+date+",");
                 }
-                UpdateExpiry adder = new UpdateExpiry();
+                com.example.cookbook2.UpdateExpiry adder = new com.example.cookbook2.UpdateExpiry();
                 adder.addItem(toBeAdded,date);
             }
             @Override

@@ -5,14 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
+    android:layout_gravity="center"
     android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/title1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/app_icon_round"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter email"
         android:id="@+id/email"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/title1"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -20,7 +33,7 @@
         android:hint="Enter password"
         android:id="@+id/password"
         android:layout_below="@+id/email"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:inputType="textPassword"/>
 
     <Button
