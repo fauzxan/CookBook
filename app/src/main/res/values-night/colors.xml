@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorButton">#FF03DAC5</color>
     <color name="text">#FF000000</color>
+    <color name="cartText">#0FB1B1</color>
 </resources>
