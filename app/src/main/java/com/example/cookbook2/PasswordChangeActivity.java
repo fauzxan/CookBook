@@ -17,8 +17,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class PasswordChangeActivity extends AppCompatActivity {
 
-    private EditText oldpassword;
-    private  EditText newpassword;
+    private TextInputEditText oldpassword;
+    private TextInputEditText newpassword;
     private Button changePassword;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -29,8 +29,8 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
         String usernameToAssign= String.valueOf(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
-        oldpassword= (EditText) findViewById(R.id.oldpassword);
-        newpassword= (EditText) findViewById(R.id.newpassword);
+        oldpassword= (TextInputEditText) findViewById(R.id.oldpassword);
+        newpassword= (TextInputEditText) findViewById(R.id.newpassword);
         changePassword= (Button) findViewById(R.id.changePassword);
 
         changePassword.setOnClickListener(new View.OnClickListener() {
