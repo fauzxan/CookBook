@@ -2,15 +2,8 @@ package com.example.cookbook2;
 
 import static java.lang.Integer.parseInt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,28 +12,28 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.google.zxing.Result;
-
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
-import org.w3c.dom.Text;
+import com.google.zxing.Result;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class barcode extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class BarcodeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private static final int CAMERA_REQUEST_CODE = 101;
     private CodeScanner mCodeScanner;
     private String date;
@@ -60,7 +53,7 @@ public class barcode extends AppCompatActivity implements DatePickerDialog.OnDat
 
         TextView textView = (TextView) findViewById(R.id.text_view); // text view from activity.xml
 
-        CodeScannerView scannerView = findViewById(R.id.scanner_view); // barcode from activity.xml
+        CodeScannerView scannerView = findViewById(R.id.scanner_view); // BarcodeActivity from activity.xml
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -68,12 +61,12 @@ public class barcode extends AppCompatActivity implements DatePickerDialog.OnDat
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(barcode.this, "Please enter expiry date", Toast.LENGTH_LONG).show();
+                        Toast.makeText(BarcodeActivity.this, "Please enter expiry date", Toast.LENGTH_LONG).show();
                         textView.setText(result.getText());
 
                         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                barcode.this,
-                                (DatePickerDialog.OnDateSetListener) barcode.this,
+                                BarcodeActivity.this,
+                                (DatePickerDialog.OnDateSetListener) BarcodeActivity.this,
                                 Calendar.getInstance().get(Calendar.YEAR),
                                 Calendar.getInstance().get(Calendar.MONTH),
                                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -87,7 +80,11 @@ public class barcode extends AppCompatActivity implements DatePickerDialog.OnDat
                                 if (mth.length() == 1){
                                     mth = "0"+mth;
                                 }
-                                date = year+"-"+mth+"-"+dayOfMonth;
+                                String dayt = ""+dayOfMonth;
+                                if (dayt.length() == 1){
+                                    dayt = "0"+dayt;
+                                }
+                                date = year+"-"+mth+"-"+dayt;
 
                                 mainmain.addListenerForSingleValueEvent(new ValueEventListener()
                                 {
@@ -173,7 +170,7 @@ public class barcode extends AppCompatActivity implements DatePickerDialog.OnDat
 
         });
 
-        // a click to let the scanner know to scan anew barcode
+        // a click to let the scanner know to scan anew BarcodeActivity
         scannerView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -229,6 +226,10 @@ public class barcode extends AppCompatActivity implements DatePickerDialog.OnDat
         if (mth.length() == 1){
             mth = "0"+mth;
         }
-        date = year+"-"+mth+"-"+dayOfMonth;
+        String dayt = ""+dayOfMonth;
+        if (dayt.length() == 1){
+            dayt = "0"+dayt;
+        }
+        date = year+"-"+mth+"-"+dayt;
     }
 }
