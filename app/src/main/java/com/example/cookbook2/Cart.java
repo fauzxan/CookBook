@@ -1,5 +1,10 @@
 package com.example.cookbook2;
 
+/*
+This class defines the properties of a Cart object. Each instance has the an item name and the quantity of the item. The class also includes
+various get and set methods for each of its properties.
+ */
+
 public class Cart {
     private String item_name;
     private String quantity;

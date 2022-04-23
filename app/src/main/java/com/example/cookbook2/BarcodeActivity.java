@@ -33,6 +33,12 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+/*
+This is the page that opens the camera inside the application and acts as a barcode scanner. The scanner scans a barcode, and recognizes it (item details already included in FireBase).
+After scanning, the application displays a calender, so that the user can input the expiry date for the item scanner. The app automatically adds the item into the database, and can be
+viewed in the main page of the application.
+ */
+
 public class BarcodeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private static final int CAMERA_REQUEST_CODE = 101;
     private CodeScanner mCodeScanner;
@@ -150,6 +156,7 @@ public class BarcodeActivity extends AppCompatActivity implements DatePickerDial
         super.onPause();
     }
 
+    // This method asks the user for permission to utilize the camera, for scanning the barcode of an item
     private void setupPermission(){
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 
