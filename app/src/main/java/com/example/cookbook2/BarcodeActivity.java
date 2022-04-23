@@ -121,49 +121,6 @@ public class BarcodeActivity extends AppCompatActivity implements DatePickerDial
                                 });
                             }
                         });
-
-                        /*datePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener()
-                        {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface)
-                            {
-                                mainmain.addListenerForSingleValueEvent(new ValueEventListener()
-                                {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot)
-                                    {
-                                        String productName= snapshot.child("Productlist").child(result.getText()).child("Title").getValue().toString();
-                                        DataSnapshot fridgestuff=snapshot.child(username).child("User Inventory").child("Location");
-                                        locate.child(productName).child(productName).setValue(productName);
-                                        if (fridgestuff.child(productName).hasChild("qty")){// this if else statement increases the qty of existing element if it already exists in the list.
-                                            String temp= ""+fridgestuff.child(productName).child("qty").getValue();
-                                            int qty=parseInt(temp);
-                                            locate.child(productName).child("qty").setValue(String.valueOf(++qty));
-
-                                            String old=fridgestuff.child(productName).child("zED").getValue().toString().concat(""+date+",");
-                                            List<String> toSort = Arrays.asList(old.split(","));
-                                            Collections.sort(toSort);
-                                            String newDates = TextUtils.join(",",toSort)+",";
-                                            locate.child(productName).child("zED").setValue(newDates);
-                                        }
-                                        else {
-                                            locate.child(productName).child("qty").setValue("1");
-                                            locate.child(productName).child("zED").setValue(""+date+",");
-                                        }
-                                        UpdateExpiry adder = new UpdateExpiry();
-                                        adder.addItem(productName,date);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error)
-                                    {
-
-                                    }
-                                })
-                            ;}
-
-                        }
-                        );*/
                     }
                 });
             }

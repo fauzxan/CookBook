@@ -40,36 +40,9 @@ public class FirebaseHelper {
     }
 
     public interface DataStatus{
-        //void DataIsLoaded(List<Product> products, List<String> keys);
         void DataIsLoadedCart(List<Cart> carts, List<String> keys);
         void DataInserted();
-        void DataIsUpdated();
-        void DataIsDeleted();
     }
-
-/*    public void readProducts(final DataStatus dataStatus){
-//        if(mode == "product") {
-        mReferenceProducts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                products.clear();
-                List<String> keys = new ArrayList<>();
-
-                for (DataSnapshot keyNode : snapshot.getChildren()) {
-                    keys.add(keyNode.getKey());
-                    Product product = keyNode.getValue(Product.class);
-                    products.add(product);
-                }
-                dataStatus.DataIsLoaded(products, keys);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("PROBLEM FIREBASE", "not nice");
-            }
-        });
-    }*/
-
     public void readCart(final DataStatus dataStatus){
 
         mReferenceCart.addValueEventListener(new ValueEventListener() {
@@ -92,17 +65,6 @@ public class FirebaseHelper {
             }
         });
     }
-
-/*    public void addCart(Cart cart , final DataStatus dataStatus){
-        String key = cart.getItem_name();
-        mReferenceCart.child(key).setValue(cart)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        dataStatus.DataInserted();
-                    }
-                });
-    }*/
 
     public void updateCart(Cart cart, final DataStatus dataStatus){
         String key = cart.getItem_name();

@@ -21,11 +21,6 @@
         <!--            android:exported="false"-->
         <!--            android:parentActivityName="com.example.CookBook.MainActivity"/>-->
         <activity
-            android:name="com.example.cookbook2.AddCart"
-            android:exported="false"
-            android:parentActivityName="com.example.cookbook2.MainActivity">
-        </activity>
-        <activity
             android:name="com.example.cookbook2.BarcodeActivity"
             android:exported="false"
             android:parentActivityName="com.example.cookbook2.MainActivity"/>

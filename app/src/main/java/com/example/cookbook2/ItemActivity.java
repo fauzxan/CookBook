@@ -183,47 +183,11 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
                                 public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {
                                 }
                                 @Override
-                                public void DataInserted() {
-                                }
-                                @Override
-                                public void DataIsUpdated() {
-                                }
-                                @Override
-                                public void DataIsDeleted() {
-                                }
+                                public void DataInserted() {}
                             });
                         }
                     }
                 }
-
-                /*if (snapshot.hasChild(today)){
-                    for (DataSnapshot ss: snapshot.child(today).getChildren()){
-                        int qty = parseInt(ss.getValue().toString());
-                        UpdateItems removeExpired = new UpdateItems();
-                        for (int i=0; i<qty; i++){
-                            removeExpired.remove(ss.getKey());
-                        }
-                        //root.child("Cart").child(ss.getKey()).setValue(ss.getKey());//item is added to cart/shopping list when it is expired
-                        Cart expired = new Cart();
-                        expired.setItem_name(ss.getKey());
-                        expired.setQuantity(ss.getValue().toString());
-                        new FirebaseHelper().updateCart(expired, new FirebaseHelper.DataStatus() {
-                            @Override
-                            public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {
-                            }
-                            @Override
-                            public void DataInserted() {
-                            }
-                            @Override
-                            public void DataIsUpdated() {
-                            }
-                            @Override
-                            public void DataIsDeleted() {
-                            }
-                        });
-
-                    }
-                }*/
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -277,9 +241,6 @@ public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSet
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-//        myAlarm();
 
         return view;
     }
