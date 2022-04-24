@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/*
+This class has the adaptor subclass, which is used for the recycler view of the cart list items.
+ */
+
 public class CartRecyclerView_Config {
     private Context mContext;
     private CartAdapter mCartAdapter;
@@ -46,6 +50,7 @@ public class CartRecyclerView_Config {
         }
     }
 
+    // the adaptor for the cart list item
     class CartAdapter extends RecyclerView.Adapter<CartItemView>{
         private List<Cart> mCart;
         private List<String> mKey;

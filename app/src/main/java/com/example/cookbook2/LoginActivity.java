@@ -15,6 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/*
+This LoginActivity.java file helps the user login into the main personalized page of the user. This login page should check the details provided by the
+user, with the details in the database. If the particulars match, then the user is logs into the app.
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
@@ -44,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // logs the user in the application if the particulars are in par with the one in Firebase
     private void loginUser(String email, String password) {
 
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

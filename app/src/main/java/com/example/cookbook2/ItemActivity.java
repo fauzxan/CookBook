@@ -32,6 +32,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+/*
+This is the first fragment included in the bottom navigation bar. The purpose of this fragment is to display the various items included in the inventory
+list. This fragment also gives the use freedom in adding new items manually and the deletion of items from the list.
+ */
+
 public class ItemActivity extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private EditText item;
