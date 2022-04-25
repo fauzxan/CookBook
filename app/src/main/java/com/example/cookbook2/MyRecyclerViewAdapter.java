@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/*
+This java file is an Adaptor file. It helps in the displaying the items as a Recycler View.
+ */
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
     private ArrayList<String> mData;
     private LayoutInflater mInflater;

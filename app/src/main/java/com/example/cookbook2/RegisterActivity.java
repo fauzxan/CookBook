@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/*
+This activity java file helps the user register their account onto the application. The user details are saved onto the Firebase upon successful
+registration.
+ */
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText email;

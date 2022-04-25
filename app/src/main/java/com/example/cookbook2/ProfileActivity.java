@@ -18,6 +18,11 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*
+This is the final fragment of the file. It displays the user details, and displays buttons if the user wants to change password, or to logout of the
+application.
+ */
+
 public class ProfileActivity extends Fragment {
 
     private TextView username;

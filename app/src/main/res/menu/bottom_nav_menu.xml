@@ -2,23 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_edit_items"
         android:icon="@drawable/ic_baseline_list_24"
         android:title="Inventory List" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_openbarcode"
         android:icon="@drawable/ic_baseline_control_camera_24"
         android:title="Barcode Scanner" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_shopping_list"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Cart" />
 
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profile"/>
 
 </menu>
+

@@ -19,6 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+/*
+This fragment is to display the items in the shopping cart. It makes the use of RecyclerView to display the items. The application also allows the user
+to manually add items onto the shopping cart.
+ */
+
 public class ShoppingList extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -41,7 +46,6 @@ public class ShoppingList extends Fragment {
         item_name = (EditText) view.findViewById(R.id.input);
         item_quantity = (EditText) view.findViewById(R.id.inputquantity);
 
-        Intent intent = new Intent(view.getContext(), AddCart.class);
         add_cart = (ImageView) view.findViewById(R.id.add);
 
         add_cart.setOnClickListener(new View.OnClickListener() {
@@ -53,23 +57,11 @@ public class ShoppingList extends Fragment {
                     cart.setQuantity(item_quantity.getText().toString());
                     new FirebaseHelper().updateCart(cart, new FirebaseHelper.DataStatus() {
                         @Override
-                        public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {
-
-                        }
+                        public void DataIsLoadedCart(List<Cart> carts, List<String> keys) {}
 
                         @Override
                         public void DataInserted() {
                             Toast.makeText(view.getContext(), "The item has been added successfully into cart", Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void DataIsUpdated() {
-
-                        }
-
-                        @Override
-                        public void DataIsDeleted() {
-
                         }
                     });
                 }
@@ -79,12 +71,7 @@ public class ShoppingList extends Fragment {
                 }
             }
         });
-//        add_cart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(intent);
-//            }
-//        });
+
 
         clear_cart = (ImageView) view.findViewById(R.id.clear_cart);
         clear_cart.setOnClickListener(new View.OnClickListener() {
@@ -97,37 +84,14 @@ public class ShoppingList extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cart_recycler);
         FirebaseHelper fb = new FirebaseHelper();
         fb.readCart(new FirebaseHelper.DataStatus() {
-
             @Override
-            public void DataInserted() {
-
-            }
-
-            @Override
-            public void DataIsUpdated() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
+            public void DataInserted() {}
 
             @Override
             public void DataIsLoadedCart(List<Cart> carts, List<String> keys){
                 new CartRecyclerView_Config().setConfig(mRecyclerView, view.getContext(), carts, keys);
             }
         });
-
-//        mRecyclerView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                makeToast("Removed: " + items.get(i));
-//                removeItem(i);
-//                return false;
-//            }
-//        });
-
         return view;
     }
 

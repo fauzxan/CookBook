@@ -18,6 +18,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Calendar;
 import java.util.Date;
 
+/*
+This is the Main Activity page that binds all the fragments in the application. It shows each fragment as the user navigates through the bottom navigation
+bar. This file also contains myAlarm() method that is used to push notifications to the user, notifying them of items that are soon to be expiring.
+ */
+
 //looking for this change
 public class MainActivity extends AppCompatActivity{
 
@@ -29,18 +34,13 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent ii = getIntent();
-        //setContentView(R.layout.activity_edit_items);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-//        //navView.setOnItemSelectedListener(listener);
-//        //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
-//        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_account)
+                R.id.navigation_edit_items, R.id.navigation_openbarcode, R.id.navigation_shopping_list, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
