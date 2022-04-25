@@ -10,6 +10,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+/*
+The file is one of the fragments which describes how the user can add items to the inventory list by scanning an item. This file contains a button, which
+on click opens the camera, to scan the barcode.
+ */
 
 public class OpenBarcodeActivity extends Fragment {
 

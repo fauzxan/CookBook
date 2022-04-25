@@ -19,6 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+/*
+This fragment is to display the items in the shopping cart. It makes the use of RecyclerView to display the items. The application also allows the user
+to manually add items onto the shopping cart.
+ */
+
 public class ShoppingList extends Fragment {
 
     private RecyclerView mRecyclerView;

@@ -16,6 +16,11 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*
+This activity page is to help the user change the password. The application prompts the user to input the old password, and allows a successful change in
+password if the old password is correct.
+ */
+
 public class PasswordChangeActivity extends AppCompatActivity {
 
     private TextInputEditText oldpassword;
